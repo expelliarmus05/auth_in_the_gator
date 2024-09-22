@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(insertable=false,updatable=false)
+    @Column(insertable = false, updatable = false)
     private Long id;
 
     @NotBlank
@@ -118,6 +119,7 @@ public class User {
     public void setLastName(@NotBlank @Size(max = 20) String lastName) {
         this.lastName = lastName;
     }
+
     public String getUsername() {
         return username;
     }

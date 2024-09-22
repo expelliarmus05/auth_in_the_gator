@@ -1,6 +1,7 @@
 package com.example.authInTheGator.service;
 
 import com.example.authInTheGator.entity.User;
+import com.example.authInTheGator.entity.enums.AuthProvider;
 import com.example.authInTheGator.entity.enums.Role;
 import com.example.authInTheGator.repository.AuthUserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,21 +29,18 @@ public class AuthUserService {
                 new EntityNotFoundException("User not found!"));
     }
 
-    public Optional<User> findByEmail(String email) {
-        return authUserRepository.findByEmail(email);
-    }
-
     public boolean UserExistWithEmail(String email) {
-        return findByEmail(email).isEmpty();
+        return authUserRepository.existsByEmail(email);
     }
 
     @Transactional
-    public void saveUser(User User) {
-        User.setPassword(passwordEncoder.encode(User.getPassword()));
-        if (User.getRoles() == null) {
-            User.setRoles(Set.of(Role.USER));
+    public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getRoles() == null) {
+            user.setRoles(Set.of(Role.USER));
         }
-        authUserRepository.save(User);
+        user.setProvider(AuthProvider.SELF);
+        authUserRepository.save(user);
     }
 
     @Transactional
