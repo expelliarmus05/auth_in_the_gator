@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -27,14 +28,12 @@ public class AuthUserService {
                 new EntityNotFoundException("User not found!"));
     }
 
-    public User findByEmail(String email) {
-        return authUserRepository.findByEmail(email).orElseGet(
-                User::new
-        );
+    public Optional<User> findByEmail(String email) {
+        return authUserRepository.findByEmail(email);
     }
 
     public boolean UserExistWithEmail(String email) {
-        return findByEmail(email).getId()==null;
+        return findByEmail(email).isEmpty();
     }
 
     @Transactional

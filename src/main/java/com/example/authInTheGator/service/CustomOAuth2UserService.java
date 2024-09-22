@@ -42,7 +42,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
 
         // Check if the user already exists in the database, otherwise register them
-        User user = authUserRepository.findByEmail(email).orElseGet(() -> {
+        authUserRepository.findByEmail(email).orElseGet(() -> {
             User newUser = new User();
             newUser.setFirstName(name.split(" ")[0]);
             newUser.setLastName(name.split(" ")[name.split(" ").length - 1]);
