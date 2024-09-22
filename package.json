@@ -1,0 +1,26 @@
+{
+  "name": "authinthegator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx tailwindcss -i ./src/main/resources/static/css/tailwind.css -o ./src/main/resources/static/css/styles.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/expelliarmus05/auth_in_the_gator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/expelliarmus05/auth_in_the_gator/issues"
+  },
+  "homepage": "https://github.com/expelliarmus05/auth_in_the_gator#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.12"
+  }
+}
