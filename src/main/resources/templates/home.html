@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::main})}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title>Thymeleaf demo simple</title>
 </head>
 <body>
-<h1>Welcome to the Home Page!</h1>
+<main>
+<h1>HELLO</h1>
+</main>
 </body>
 </html>
