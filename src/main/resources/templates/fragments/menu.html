@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
-<div th:fragment="menu">
-  <ul class="space-y-4">
-    <li><a href="/dashboard" class="block p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Dashboard</a></li>
-    <li><a href="/profile" class="block p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Profile</a></li>
-    <li><a href="/settings" class="block p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Settings</a></li>
-  </ul>
-</div>
+<aside th:fragment="menu" id="default-sidebar" class=" top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <ul class="space-y-2 font-medium">
+      Side Bar
+    </ul>
+  </div>
+</aside>
 </body>
 </html>

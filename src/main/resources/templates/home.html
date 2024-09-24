@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::main})}"
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thymeleaf demo simple</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<main>
-<h1>HELLO</h1>
+<main class="py-6 px-12 space-y-12 min-h-screen w-full">
+    <h1>HELLO</h1>
 </main>
 </body>
 </html>
