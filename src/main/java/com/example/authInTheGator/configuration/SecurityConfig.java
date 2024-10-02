@@ -1,6 +1,6 @@
 package com.example.authInTheGator.configuration;
 
-import com.example.authInTheGator.service.CustomOAuth2UserService;
+import com.example.authInTheGator.service.oAuth2.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -66,6 +66,7 @@ public class SecurityConfig {
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth

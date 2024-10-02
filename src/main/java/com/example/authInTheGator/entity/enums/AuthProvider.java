@@ -1,5 +1,5 @@
 package com.example.authInTheGator.entity.enums;
 
 public enum AuthProvider {
-    LOCAL, GOOGLE, FACEBOOK, SELF
+    LOCAL, GOOGLE, FACEBOOK, GITHUB
 }
