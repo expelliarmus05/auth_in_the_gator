@@ -1,6 +1,6 @@
 package com.example.authInTheGator.controller.auth;
 
-import com.example.authInTheGator.entity.User;
+import com.example.authInTheGator.entity.AuthUser;
 import com.example.authInTheGator.service.AuthUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -25,18 +25,18 @@ public class RegistrationController {
     }
 
     @ModelAttribute
-    public User addUserToModel() {return new User();}
+    public AuthUser addUserToModel() {return new AuthUser();}
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new AuthUser());
         return "auth/register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute User user, BindingResult result) {
+    public String registerUser(@Valid @ModelAttribute AuthUser authUser, BindingResult result) {
 
-        return authUserService.register(user, result);
+        return authUserService.register(authUser, result);
     }
 
 }

@@ -9,12 +9,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class AuthUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, updatable = false)
@@ -51,6 +50,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
+
+    private String oAuthId;
+
     private Boolean disabled = false;
 
     private Boolean deleted = false;
@@ -61,7 +63,23 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public User() {
+    public AuthUser() {
+    }
+
+    public AuthUser(Set<Role> roles, String email, String username, String firstName, String lastName) {
+        this.roles = roles;
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getOAuthId() {
+        return oAuthId;
+    }
+
+    public void setOAuthId(String oAuthId) {
+        this.oAuthId = oAuthId;
     }
 
     public @NotBlank @Size(max = 60) String getFirstName() {
@@ -160,20 +178,7 @@ public class User {
         this.provider = provider;
     }
 
-    public User(Long id, String firstName, String lastName, String username, String password, String email, Set<Role> roles, AuthProvider provider, Boolean disabled, Boolean deleted, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.roles = roles;
-        this.provider = provider;
-        this.disabled = disabled;
-        this.deleted = deleted;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+
 
 
 }

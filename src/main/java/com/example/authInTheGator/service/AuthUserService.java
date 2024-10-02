@@ -1,6 +1,6 @@
 package com.example.authInTheGator.service;
 
-import com.example.authInTheGator.entity.User;
+import com.example.authInTheGator.entity.AuthUser;
 import com.example.authInTheGator.entity.enums.AuthProvider;
 import com.example.authInTheGator.entity.enums.Role;
 import com.example.authInTheGator.repository.AuthUserRepository;
@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -24,36 +23,44 @@ public class AuthUserService {
     }
 
 
-    public User findById(Long id) {
+    public AuthUser findById(Long id) {
         return authUserRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("User not found!"));
     }
 
-    public boolean UserExistWithEmail(String email) {
+    public boolean userExistWithEmail(String email) {
         return authUserRepository.existsByEmail(email);
     }
 
     @Transactional
-    public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getRoles() == null) {
-            user.setRoles(Set.of(Role.USER));
+    public void saveUser(AuthUser authUser) {
+        authUser.setPassword(passwordEncoder.encode(authUser.getPassword()));
+        if (authUser.getRoles() == null) {
+            authUser.setRoles(Set.of(Role.USER));
         }
-        user.setProvider(AuthProvider.SELF);
-        authUserRepository.save(user);
+        authUser.setProvider(AuthProvider.LOCAL);
+        authUserRepository.save(authUser);
+    }
+    @Transactional
+    public AuthUser findByEmail(String email) {
+        return authUserRepository.findByEmail(email);
+    }
+    @Transactional
+    public void saveOrUpdateSocialAccount(AuthUser account) {
+        authUserRepository.save(account);
     }
 
     @Transactional
-    public String register(User User, BindingResult result) {
+    public String register(AuthUser AuthUser, BindingResult result) {
         if (result.hasErrors()) return "auth/register";
 
-        if (UserExistWithEmail(User.getEmail())) {
+        if (userExistWithEmail(AuthUser.getEmail())) {
             result.rejectValue("email", "duplicate.email",
                     "There is already an User registered with the same email");
             return "auth/register";
         }
 
-        saveUser(User);
+        saveUser(AuthUser);
 
         return "redirect:/auth/login";
     }
