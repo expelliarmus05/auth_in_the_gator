@@ -3,7 +3,7 @@ package com.example.authInTheGator.service.oAuth2;
 import com.example.authInTheGator.entity.AuthUser;
 import com.example.authInTheGator.entity.enums.AuthProvider;
 import com.example.authInTheGator.entity.enums.Role;
-import com.example.authInTheGator.service.AuthUserService;
+import com.example.authInTheGator.service.auth.AuthUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

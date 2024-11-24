@@ -2,7 +2,6 @@ package com.example.authInTheGator.service.oAuth2;
 
 import com.example.authInTheGator.entity.AuthUser;
 import com.example.authInTheGator.repository.AuthUserRepository;
-import com.example.authInTheGator.service.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;

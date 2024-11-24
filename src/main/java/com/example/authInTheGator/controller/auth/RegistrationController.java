@@ -1,7 +1,7 @@
 package com.example.authInTheGator.controller.auth;
 
 import com.example.authInTheGator.entity.AuthUser;
-import com.example.authInTheGator.service.AuthUserService;
+import com.example.authInTheGator.service.auth.AuthUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;

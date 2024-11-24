@@ -1,4 +1,4 @@
-package com.example.authInTheGator.service;
+package com.example.authInTheGator.service.auth;
 
 import com.example.authInTheGator.entity.AuthUser;
 import com.example.authInTheGator.repository.AuthUserRepository;

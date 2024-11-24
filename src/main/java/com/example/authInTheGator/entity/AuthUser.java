@@ -56,6 +56,7 @@ public class AuthUser {
     private Boolean disabled = false;
 
     private Boolean deleted = false;
+    private Boolean verified = false;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -178,7 +179,11 @@ public class AuthUser {
         this.provider = provider;
     }
 
+    public Boolean getVerified() {
+        return verified;
+    }
 
-
-
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
 }

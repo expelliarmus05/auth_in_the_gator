@@ -1,8 +1,9 @@
-package com.example.authInTheGator.service;
+package com.example.authInTheGator.service.auth;
 
 import com.example.authInTheGator.entity.AuthUser;
 import com.example.authInTheGator.entity.enums.AuthProvider;
 import com.example.authInTheGator.entity.enums.Role;
+import com.example.authInTheGator.entity.enums.VerificationType;
 import com.example.authInTheGator.repository.AuthUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -16,10 +17,12 @@ import java.util.Set;
 public class AuthUserService {
     private final AuthUserRepository authUserRepository;
     private final PasswordEncoder passwordEncoder;
+    private final VerificationService verificationService;
 
-    public AuthUserService(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder) {
+    public AuthUserService(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder, VerificationService verificationService) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
+        this.verificationService = verificationService;
     }
 
 
@@ -51,16 +54,18 @@ public class AuthUserService {
     }
 
     @Transactional
-    public String register(AuthUser AuthUser, BindingResult result) {
+    public String register(AuthUser authUser, BindingResult result) {
         if (result.hasErrors()) return "auth/register";
 
-        if (userExistWithEmail(AuthUser.getEmail())) {
+        if (userExistWithEmail(authUser.getEmail())) {
             result.rejectValue("email", "duplicate.email",
                     "There is already an User registered with the same email");
             return "auth/register";
         }
 
-        saveUser(AuthUser);
+        this.saveUser(authUser);
+        verificationService.sendVerificationEmail(authUser.getEmail(), VerificationType.LINK);
+
 
         return "redirect:/auth/login";
     }
